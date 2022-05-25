@@ -1,0 +1,326 @@
+<!--
+  Generated template for the DashboardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button menuToggle left>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Dashboard</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+            refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-card *ngIf="user.type != 1">
+        <ion-card-content padding class="walletBox" color="primary">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <div class="card-content-title">
+                            {{user.name}}
+                        </div>
+                        <p class="help"> +1 {{user.mobile}}</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <!-- Carousel -->
+    <ion-slides autoplay="10000" pager="true" loop="true" *ngIf="user.type != 1 && banners.length > 0">
+        <ion-slide *ngFor="let banner of banners">
+            <img [src]="imageUrl + banner._id + '.png'" />
+        </ion-slide>
+    </ion-slides>
+    <!-- updates -->
+    <ion-card *ngIf=" user.type !=3">
+        <ion-item no-padding>
+            Updates
+        </ion-item>
+        <ion-card-content padding class="updateBox" color="primary">
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <div class="card-content-title">
+                            {{totalVouchers | number: '2.0-0'}}
+                        </div>
+                        <p class="help"> Vouchers Sold</p>
+                    </ion-col>
+                    <ion-col>
+                        <div class="card-content-title" *ngIf="user.type!=2">
+                            {{totalCost | currency: 'XCD': 'small-symbol': '2.2-2'}}
+                        </div>
+                        <div class="card-content-title" *ngIf="user.type==2">
+                            {{(user.commision * totalCost / 100)| currency: 'XCD': 'small-symbol': '2.2-2'}}
+                        </div>
+                        <p class="help"> Total Earnings</p>
+                    </ion-col>
+                    <ion-col *ngIf="user.type==2">
+                        <div class="card-content-title"> {{user.commision | number: '2.2-2'}}%
+                        </div>
+                        <p class="help"> Commission</p>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <!-- Coupons -->
+    <ion-card *ngIf="user.type==1">
+        <ion-item no-padding>
+            All Coupons
+            <span>
+                {{couponCount}} Coupon(s)
+            </span>
+        </ion-item>
+        <ion-card-content no-padding>
+            <ion-list>
+                <ion-item (click)="viewCoupon(item)" *ngFor="let item of coupons">
+                    <div class="heading copyText">{{item.couponCode}}
+                        <span class="amount" *ngIf="item.isAbs">
+                            {{item.value | currency: 'XCD': 'symbol': '2.2-2'}}
+                        </span>
+                        <span class="amount" *ngIf="!item.isAbs">
+                            {{item.value}} %
+                        </span>
+                    </div>
+                    <p text-wrap class="info">
+                        {{item.type}}
+                    </p>
+                    <p text-wrap class="info">
+                        Minimum Purchased Value {{item.minAmount | currency: 'XCD': 'symbol': '2.2-2'}}
+                    </p>
+                    <p text-wrap class="info">
+                        Maximum Discount {{item.maxAmount | currency: 'XCD': 'symbol': '2.2-2'}}
+                    </p>
+                    <p class="note">
+                        Valid from {{item.validityStart | date :'medium'}} to {{item.validity | date :'medium'}}
+                    </p>
+                </ion-item>
+                <button ion-item detail-none gradient-alt (click)="viewCoupons()" clear *ngIf="couponCount> 3"> View All
+                    <ion-icon name="arrow-dropright" item-end></ion-icon>
+                </button>
+                <button ion-item detail-none gradient-alt (click)="addCoupon()" clear *ngIf="couponCount <= 3">
+                    Add New
+                    <ion-icon name="arrow-dropright" item-end></ion-icon>
+                </button>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <!-- Wallet -->
+    <ion-card *ngIf="user.type != 1">
+        <ion-item no-padding>
+            <h2>Wallet</h2>
+        </ion-item>
+        <ion-card-content padding class="walletBox" color="primary">
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-8>
+                        <div class="card-content-title">
+                            {{walletBalance | currency: 'XCD': 'small-symbol': '2.2-2'}}
+                        </div>
+                        <p class="help"> My Balance </p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <button small ion-col ion-5 text-center ion-button gradient (click)="sendMoney()">
+                        Send Money
+                    </button>
+                    <button ion-col ion-5 offset-2 text-center ion-button small gradient (click)="addBalance()">
+                        Add Money
+                    </button>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <!-- view, purchase or sell -->
+    <ion-card>
+        <button *ngIf="user.type == 3" gradient ion-item details-none (click)="buyVoucher()" class="purchase">
+            Purchase a New Voucher
+            <ion-icon item-end name="arrow-dropright"></ion-icon>
+        </button>
+        <button *ngIf="user.type == 2" gradient ion-item details-none (click)="sellVoucher()" class="purchase">
+            Sell a New Voucher
+            <ion-icon item-end name="arrow-dropright"></ion-icon>
+        </button>
+        <button *ngIf="user.type == 1" gradient ion-item details-none (click)="viewVouchers()" class="purchase">
+            View all Vouchers
+            <ion-icon item-end name="arrow-dropright"></ion-icon>
+        </button>
+    </ion-card>
+    <ion-card *ngIf="user.type == 1">
+        <button gradient ion-item details-none (click)="viewBanners()" class="purchase">
+            View all Banners
+            <ion-icon item-end name="arrow-dropright"></ion-icon>
+        </button>
+    </ion-card>
+    <!-- vouchers list -->
+    <ion-card *ngIf="user.type != 1">
+        <ion-item no-padding>
+            {{user.type == 3 ? 'My Purchased Vouchers' : 'Recently Sold Vouchers'}}
+            <span>
+                {{totalVouchers}} {{user.type == 3 ? 'Bought' : 'Sold'}}
+            </span>
+        </ion-item>
+        <ion-card-content no-padding>
+            <ion-list>
+                <ion-item (click)="showVoucherActionSheet(item)" *ngFor="let item of vouchers">
+                    <div class="heading copyText">{{item.id}}
+                        <span class="amount">
+                            {{item._plan.price | currency: 'XCD': 'symbol': '2.2-2'}}
+                        </span>
+                    </div>
+                    <p text-wrap class="info">
+                        {{item._plan.bytes_t > 0 ? + item._plan.bytes_t + ' MB' : 'Unlimited'}} @
+                        <ion-icon color="primary" name="arrow-round-down"></ion-icon> {{item._plan.speed_dl}} kB/sec
+                        <ion-icon color="other" name="arrow-round-up"></ion-icon> {{item._plan.speed_ul}} kB/sec
+                    </p>
+                    <p class="info">
+                        Valid for {{item._plan.duration_val}} Day(s)
+                    </p>
+                    <p class="note">
+                        {{user.type == 3 ? 'Purchased' : 'Sold'}} on {{item.createdAt | date}}
+                    </p>
+                    <p *ngIf="item._user && item._user._id != user._id" class="note transfered">
+                        Transfered to {{item._user.name}}
+                    </p>
+                    <p *ngIf="item._mobile" class="note transfered">
+                        Transfered to {{item._mobile}}
+                    </p>
+                </ion-item>
+                <button ion-item detail-none gradient-alt (click)="viewVouchers()" clear *ngIf="totalVouchers > 3">
+                    View All
+                    <ion-icon name="arrow-dropright" item-end></ion-icon>
+                </button>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <!-- plans list -->
+    <ion-card *ngIf="user.type == 1">
+        <ion-item no-padding>
+            Plans
+            <span>
+                {{totalPlans}} Plans
+            </span>
+        </ion-item>
+        <ion-card-content no-padding>
+            <ion-list>
+                <ion-item (click)="showPlanActionSheet(item)" *ngFor="let item of plans">
+                    <div class="heading">{{item.plan_name}}
+                        <span class="amount">
+                            {{item.price | currency: 'XCD': 'symbol': '2.2-2'}}
+                        </span>
+                    </div>
+                    <p text-wrap class="info">
+                        {{item.bytes_t > 0 ? + item.bytes_t + ' MB' : 'Unlimited'}} @
+                        <ion-icon color="primary" name="arrow-round-down"></ion-icon> {{item.speed_dl}} kB/sec
+                        <ion-icon color="other" name="arrow-round-up"></ion-icon> {{item.speed_ul}} kB/sec
+                    </p>
+                    <p class="info">
+                        Valid for {{item.duration_val}} Day(s)
+                    </p>
+                </ion-item>
+                <button ion-item detail-none gradient-alt (click)="viewPlans()" clear *ngIf="totalPlans > 3">
+                    View All
+                    <ion-icon name="arrow-dropright" item-end></ion-icon>
+                </button>
+            </ion-list>
+            <ion-list *ngIf="user.type == 1">
+                <button ion-item detail-none gradient-alt (click)="addPlans()" clear *ngIf="totalPlans <= 3">
+                    Add New
+                    <ion-icon name="arrow-dropright" item-end></ion-icon>
+                </button>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <!-- vendors list -->
+    <ion-card *ngIf="user.type == 1">
+        <ion-item no-padding>
+            Vendors
+            <span>
+                {{totalVendors}} Vendors
+            </span>
+        </ion-item>
+        <ion-card-content no-padding>
+            <ion-list>
+                <ion-item [class.notActive]="!item.isActive" (click)="showVendorActionSheet(item)"
+                    *ngFor="let item of vendors">
+                    <ion-avatar item-start>
+                        <img [src]="item.image || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'">
+                    </ion-avatar>
+                    <div class="heading">{{item.name}}</div>
+                    <p class="info">{{item.userName}}</p>
+                    <p class="info">
+                        <ion-row>
+                            <ion-col>
+                                <ion-icon color="primary" name="call"></ion-icon>
+                                +1 {{item.mobile}}
+                            </ion-col>
+                            <ion-col>
+                                <ion-icon color="primary" name="pin"></ion-icon>
+                                {{item.location}}
+                            </ion-col>
+                        </ion-row>
+                    </p>
+                    <p class="note">
+                        <ion-icon name="cash"></ion-icon>
+                        {{item.wallet.balance | currency: 'XCD': 'small-symbol': '2.2-2'}}
+                    </p>
+                </ion-item>
+                <button ion-item detail-none gradient-alt (click)="viewVendors()" clear *ngIf="totalVendors > 3">
+                    View All
+                    <ion-icon name="arrow-dropright" item-end></ion-icon>
+                </button>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+    <!-- Clients list -->
+    <ion-card *ngIf="user.type == 1">
+        <ion-item no-padding>
+            Clients
+            <span>
+                {{totalClients}} Clients
+            </span>
+        </ion-item>
+        <ion-card-content no-padding>
+            <ion-list>
+                <ion-item (click)="showClientActionSheet(item)" *ngFor="let item of clients">
+                    <ion-avatar item-start>
+                        <img [src]="item.image || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'">
+                    </ion-avatar>
+                    <div class="heading">{{item.name}}</div>
+                    <p class="info">{{item.userName}}</p>
+                    <p class="info">
+                        <ion-row>
+                            <ion-col>
+                                <ion-icon color="primary" name="call"></ion-icon>
+                                +1 {{item.mobile}}
+                            </ion-col>
+                            <ion-col>
+                                <ion-icon color="primary" name="pin"></ion-icon>
+                                {{item.location}}
+                            </ion-col>
+                        </ion-row>
+                    </p>
+                    <p class="note">
+                        <ion-icon name="cash"></ion-icon>
+                        {{item.wallet.balance | currency: 'XCD': 'small-symbol': '2.2-2'}}
+                    </p>
+                </ion-item>
+                <button ion-item detail-none gradient-alt (click)="viewClients()" clear *ngIf="totalVendors > 3">
+                    View All
+                    <ion-icon name="arrow-dropright" item-end></ion-icon>
+                </button>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

@@ -1,0 +1,50 @@
+<!--
+  Generated template for the AddPlansPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>New Plan</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Name of Plan</ion-label>
+      <ion-input [(ngModel)]="plan.plan_name" required type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Duration (Days)</ion-label>
+      <ion-input [(ngModel)]="plan.duration_val" required type="number" val="1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Data (MB)</ion-label>
+      <ion-input [(ngModel)]="plan.bytes_t" step="0.5" type="number" val="1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Maximum download speed (kB/sec)</ion-label>
+      <ion-input [(ngModel)]="plan.speed_dl" type="number" val="1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Maximum upload speed (kB/sec)</ion-label>
+      <ion-input [(ngModel)]="plan.speed_ul" type="number" val="1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Price ($ XCD)</ion-label>
+      <ion-input [(ngModel)]="plan.price" step="0.01" type="number"></ion-input>
+    </ion-item>
+    <ion-item padding>
+      <button ion-button full icon-start (click)="create()">
+        <ion-icon name="create">
+        </ion-icon>
+        Add Plan
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,17 @@
+{
+  "name": "EPICNET",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/api/",
+      "proxyUrl": "http://52.90.89.241/s/1/api/"
+    },
+    {
+      "path": "/server/",
+      "proxyUrl": "http://localhost:3333/"
+    }
+  ]
+}

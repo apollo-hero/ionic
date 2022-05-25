@@ -1,0 +1,73 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle left>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Profile</ion-title>
+    <ion-buttons end>
+      <button ion-button *ngIf="!edit" (click)="edit = true;" icon-only>
+        <ion-icon name="create"></ion-icon>
+      </button>
+      <button ion-button *ngIf="edit" (click)="edit=false;save();" icon-only>
+        <ion-icon name="checkbox-outline"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+<ion-content>
+  <div class="main-content" text-wrap text-center>
+    <div *ngIf="!edit" class="circular">
+      <ion-img *ngIf="user.picture" [src]="user.picture"></ion-img>
+    </div>
+    <h2 *ngIf="!edit">{{user.name}}</h2>
+    <hr *ngIf="!edit">
+    <ion-list no-lines>
+      <ion-item *ngIf="edit">
+        <ion-icon color="primary" name="person" item-start></ion-icon>
+        <ion-label fixed>Name</ion-label>
+        <ion-input [(ngModel)]="user.name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon color="primary" name="mail" item-start></ion-icon>
+        <p>Email</p>
+        {{user.userName}}
+      </ion-item>
+      <ion-item>
+        <ion-icon color="primary" name="call" item-start></ion-icon>
+        <p *ngIf="!edit">Mobile</p>
+        <div ion-text *ngIf="!edit">+1  {{user.mobile}}</div>
+        <ion-label fixed *ngIf="edit">Mobile +1 </ion-label>
+        <ion-input *ngIf="edit" [(ngModel)]="user.mobile"></ion-input>
+      </ion-item>
+      <div ion-item *ngIf="!edit">
+        <ion-icon color="primary" item-start name="cash">
+        </ion-icon>
+        <p>Wallet</p>
+        {{balance | currency: 'XCD': 'symbol': '2.2-2'}}
+        <button (click)="addMoney()" ion-button item-end medium>Add Money</button>
+      </div>
+      <ion-item>
+        <ion-icon item-start name="pin" color="primary"></ion-icon>
+        <p *ngIf="!edit">{{user.location}}</p>
+        <ion-input *ngIf="edit" [(ngModel)]="user.location"></ion-input>
+      </ion-item>
+      <button *ngIf="!edit" ion-button margin block icon-left (click)="changePassword()">
+        <ion-icon color="secondary" name="save"></ion-icon>
+        Change Password
+      </button>
+      <button *ngIf="!edit" icon-left ion-button margin block (click)="rateApp()">
+        <ion-icon color="secondary" name="heart"></ion-icon>
+        Rate APP
+      </button>
+    </ion-list>
+  </div>
+
+</ion-content>

@@ -1,0 +1,67 @@
+<!--
+  Generated template for the ContactUsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button menuToggle left>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Contact Us</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <div padding-horizontal text-center class="animated fadeInDown">
+        <div class="logo"></div>
+        <h2 ion-text class="text-primary">
+            <strong>EPIC</strong> Communication Inc.
+            <small>{{appVer}}</small>
+        </h2>
+        <div ion-text>
+            Hi!
+            <br /> Have any issue?
+            <br /> We are ready to help you.
+        </div>
+    </div>
+    <div padding-horizontal padding-top text-center class="animated fadeInUp">
+        <ion-grid>
+            <ion-row padding-top>
+                <ion-col col-6 padding-horizontal>
+                    <a href="tel:+17672651124" ion-button icon-only circle padding>
+                        <ion-icon name="call"></ion-icon>
+                    </a>
+                    <div>Call Us</div>
+                </ion-col>
+                <ion-col col-6 padding-horizontal>
+                    <a href="mailto:info@epic.dm" ion-button icon-only circle padding>
+                        <ion-icon name="mail"></ion-icon>
+                    </a>
+                    <div>Mail Us</div>
+                </ion-col>
+            </ion-row>
+            <ion-row padding-top>
+                <ion-col col-2 text-right>
+                    <ion-icon name="pin"></ion-icon>
+                </ion-col>
+                <ion-col col-10 text-left>
+                    <h4>8 Castle St, Roseau</h4>
+                    <a padding-top href="http://epic.dm/" target="blank">
+                        <h4>Visit Our Website</h4>
+                    </a>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <script>
+        (function (w, d, u) {
+            var s = d.createElement('script'); s.async = true; s.src = u + '?' + (Date.now() / 60000 | 0);
+            var h = d.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s, h);
+        })(window, document, 'https://cdn.bitrix24.com/b7136119/crm/site_button/loader_1_75ibq6.js');
+    </script>
+</ion-content>

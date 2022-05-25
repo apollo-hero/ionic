@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "415848444307",
+    "firebase_url": "https://epichotspot-373d0.firebaseio.com",
+    "project_id": "epichotspot-373d0",
+    "storage_bucket": "epichotspot-373d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415848444307:android:99a0efe0ad154bd6",
+        "android_client_info": {
+          "package_name": "com.hotspot.epicnet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415848444307-muhaluma3obun51msr02p46efp687a8i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdB3A1ljrk7ruDiM1uAJOEIxr9TKIeZPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "415848444307-muhaluma3obun51msr02p46efp687a8i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

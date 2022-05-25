@@ -1,0 +1,115 @@
+<!-- -->
+<ion-content padding>
+    <div class="login-content">
+
+        <!-- Logo -->
+        <div padding text-center>
+            <div class="logo"></div>
+            <h2 ion-text class="text-primary">
+                <strong>EPIC</strong> Comm. Inc.
+            </h2>
+        </div>
+
+        <!-- Login form -->
+        <form class="list-form">
+            <ion-item>
+                <ion-label floating>
+                    <ion-icon name="person" item-start class="text-primary"></ion-icon>
+                    Full Name <i class="fa fa-asterisk text-danger"></i>
+                </ion-label>
+                <ion-input name="name" [(ngModel)]="user.name" type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>
+                    <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+                    Email
+                </ion-label>
+                <ion-input color="{{ !isValidEmail() ? 'danger' : 'primary' }}" name="userName"
+                    [(ngModel)]="user.userName" type="email"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>
+                    <ion-icon name="call" item-start class="text-primary"></ion-icon>
+                    Contact Number +1
+                </ion-label>
+                <ion-input mask="(999) 999-9999" name="mobile" (ionChange)="numberChanged(mobile)" [(ngModel)]="mobile"
+                    type="tel"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>
+                    <ion-icon name="calendar" item-start class="text-primary"></ion-icon>
+                    Age
+                </ion-label>
+                <ion-input name="age" [(ngModel)]="user.age" type="number"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>
+                    <ion-icon name="pin" item-start class="text-primary"></ion-icon>
+                    Location
+                </ion-label>
+                <ion-input name="location" [(ngModel)]="user.location" type="text"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>
+                    <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+                    Password <i class="fa fa-asterisk text-danger"></i>
+                </ion-label>
+                <ion-input name="password" [(ngModel)]="user.password" type="password"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label floating>
+                    <ion-icon name="lock" item-start class="text-primary"></ion-icon>
+                    Confirm Password
+                </ion-label>
+                <ion-input name="confirmPassword" [(ngModel)]="user.confirmPassword" type="password"></ion-input>
+            </ion-item>
+        </form>
+
+        <div margin-top>
+            <button ion-button block color="dark"
+                [disabled]="!(user.password && user.password == user.confirmPassword) || !user.mobile || !isValidEmail()"
+                tappable (click)="register()">
+                SIGN UP
+            </button>
+        </div>
+
+        <div>
+            <p text-center ion-text color="secondary">Or Sign up with:</p>
+
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-2>
+                    </ion-col>
+                    <ion-col col-4>
+                        <button (click)="fb_login()" ion-button icon-only block class="btn-facebook">
+                            <ion-icon name="logo-facebook"></ion-icon>
+                        </button>
+                    </ion-col>
+                    <!-- <ion-col col-4>
+                    <button (click)="twitter_login()" ion-button icon-only block class="btn-twitter">
+                      <ion-icon name="logo-twitter"></ion-icon>
+                    </button>
+                  </ion-col> -->
+                    <ion-col col-4>
+                        <button (click)="gplus_login()" ion-button icon-only block class="btn-gplus">
+                            <ion-icon name="logo-googleplus"></ion-icon>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+        </div>
+
+        <!-- Other links -->
+        <div text-center margin-top>
+            <span ion-text color="primary" tappable (click)="login()">I have an account</span>
+        </div>
+
+    </div>
+</ion-content>

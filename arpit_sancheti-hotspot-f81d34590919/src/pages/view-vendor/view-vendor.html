@@ -1,0 +1,61 @@
+<!--
+  Generated template for the ViewVendorPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>View Vendor</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Vendor Name</ion-label>
+      <ion-input [disabled]="!editable" type="text" [(ngModel)]="vendor.name">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input [disabled]="!editable" type="email" [(ngModel)]="vendor.userName">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Contact +1 </ion-label>
+      <ion-input [disabled]="!editable" type="number" [(ngModel)]="vendor.mobile">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Commission (%)</ion-label>
+      <ion-input [disabled]="!editable" type="number" [(ngModel)]="vendor.commision">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Gender</ion-label>
+      <ion-select [disabled]="!editable" [(ngModel)]="vendor.sex">
+        <ion-option value="female">Female</ion-option>
+        <ion-option value="male">Male</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Age</ion-label>
+      <ion-input [disabled]="!editable" type="number" min=18 max="60" [(ngModel)]="vendor.age">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Location</ion-label>
+      <ion-input [disabled]="!editable" type="text" [(ngModel)]="vendor.location">
+      </ion-input>
+    </ion-item>
+    <button *ngIf="editable" ion-button margin block icon-left (click)="update()">
+      <ion-icon color="secondary" name="save"></ion-icon>
+      Save
+    </button>
+  </ion-list>
+
+</ion-content>

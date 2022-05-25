@@ -1,0 +1,74 @@
+<!--
+  Generated template for the WalletTransferPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-title>Wallet Transfer</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-content no-padding>
+            <ion-list>
+                <ion-item color="danger" *ngIf="error">
+                    {{error}}
+                </ion-item>
+                <button *ngIf="userSelected && userSelected.userName" detail-push ion-item class="list-item"
+                    (click)="unSelectUser()">
+                    <ion-avatar item-start>
+                        <img
+                            [src]="userSelected.image || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'">
+                    </ion-avatar>
+                    <div class="heading">{{userSelected.name}}</div>
+                    <p class="info">{{userSelected.userName}}</p>
+                    <p class="info">
+                        <ion-row>
+                            <ion-col>
+                                <ion-icon color="primary" name="call"></ion-icon>
+                                +1 {{userSelected.mobile}}
+                            </ion-col>
+                            <ion-col>
+                                <ion-icon color="primary" name="pin"></ion-icon>
+                                {{userSelected.location}}
+                            </ion-col>
+                        </ion-row>
+                    </p>
+                    <span item-end>
+                        <ion-icon color="danger" name="close-circle"></ion-icon>
+                    </span>
+                </button>
+                <ion-item *ngIf="!userSelected">
+                    <ion-label floating>
+                        <ion-icon name="phone-portrait"></ion-icon> Mobile Number +1
+                    </ion-label>
+                    <ion-input required="" #input mask="(999) 999-9999" [(ngModel)]="mobile" type="tel"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="userSelected && userSelected.userName">
+                    <ion-label floating>Amount</ion-label>
+                    <ion-input [(ngModel)]="amount" name="amount" required="" type="number" steps="0.5"></ion-input>
+                </ion-item>
+                <ion-item *ngIf="userSelected && userSelected.userName">
+                    <span item-start>{{walletBalance | currency: 'XCD': 'small-symbol': '2.2-2'}}</span>
+                    <span item-end>Available Balance</span>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+<ion-footer>
+    <button (click)="search()" ion-button block icon-right *ngIf="!userSelected">
+
+        Search
+        <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+    <button block icon-right ion-button (click)="pay()" [disabled]="!amount || 0 >= amount || (amount > walletBalance)"
+        *ngIf="userSelected">
+        Pay &nbsp;&nbsp;
+        <ion-icon name="arrow-forward"></ion-icon>
+
+    </button>
+</ion-footer>

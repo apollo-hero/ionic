@@ -1,0 +1,30 @@
+<ion-menu id="admin" [content]="content">
+
+  <ion-header color="white">
+    <div class="logo"></div>
+  </ion-header>
+
+  <ion-content>
+
+    <ion-list *ngIf="user">
+      <button ion-item menuClose class="text-1x" *ngFor="let menuItem of pages | menuFilter: user.type" (click)="openPage(menuItem)">
+        <ion-icon item-left color="theme-color-1" [name]="menuItem.icon"></ion-icon>
+        <span ion-text color="dark">{{menuItem.title}}</span>
+      </button>
+      <ion-item class="fblike">
+        <div item-content>
+          <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2Fepiccommunicationsinc%2F&width=73&layout=button_count&action=like&size=small&show_faces=true&share=false&height=21&appId=228019014590139"
+            width="73" height="21" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"
+            allow="encrypted-media"></iframe>
+        </div>
+      </ion-item>
+      <button ion-item menuClose details-none class="text-1x item-footer" (click)="logout()">
+        <span ion-text color="dark">Logout</span>
+        <ion-icon item-end color="theme-color-1" name="log-out"></ion-icon>
+      </button>
+    </ion-list>
+
+  </ion-content>
+
+</ion-menu>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

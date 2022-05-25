@@ -1,0 +1,80 @@
+<!--
+  Generated template for the TransferVoucherPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle left>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Transfer Voucher</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngIf="userSelected">
+      <ion-label floating>
+        <ion-icon name="mail"></ion-icon> Email
+      </ion-label>
+      <ion-input disabled=true [(ngModel)]="user.userName" type="text"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="userSelected">
+      <ion-label floating>
+        <ion-icon name="person"></ion-icon> Name
+      </ion-label>
+      <ion-input disabled=true [(ngModel)]="user.name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>
+        <ion-icon name="phone-portrait"></ion-icon> Mobile Number +1
+      </ion-label>
+      <ion-input mask="(999) 999-9999" [(ngModel)]="mobile" (ionChange)="numberChanged(mobile)" type="tel"></ion-input>
+    </ion-item>
+    <div class="cell example example5">
+      <form>
+        <div id="example5-paymentRequest">
+          <!--Stripe paymentRequestButton Element inserted here-->
+        </div>
+        <fieldset>
+          <legend class="payment-request-available" data-tid="elements_examples.form.enter_card_manually">Voucher
+            Details</legend>
+          <div class="row">
+            <div class="field">
+              <label for="example5-name" data-tid="elements_examples.form.name_label">Code</label>
+              <ion-input disabled [(ngModel)]="voucher.id" name="fullName" type="text" required=""></ion-input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="example5-price" data-tid="elements_examples.form.price_label">Price</label>
+              <ion-input disabled [(ngModel)]="voucher._plan.price" name="price" class="input" type="tel" required=""></ion-input>
+            </div>
+          </div>
+          <div data-locale-reversible>
+            <div class="row">
+              <div class="field">
+                <label for="example5-address" data-tid="elements_examples.form.address_label">Duration</label>
+                <ion-input disabled [(ngModel)]="voucher._plan.duration_val" name="address" id="example5-address"
+                  data-tid="elements_examples.form.address_placeholder" class="input" type="text" required=""></ion-input>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <button (click)="search()" ion-button block icon-left *ngIf="!userSelected">
+      <ion-icon name="search"></ion-icon>
+      Submit
+    </button>
+    <button (click)="transfer()" ion-button block icon-left *ngIf="userSelected || numberEntered">
+      <ion-icon name="checkmark"></ion-icon>
+      Confirm
+    </button>
+  </ion-list>
+</ion-content>

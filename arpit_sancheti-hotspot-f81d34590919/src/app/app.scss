@@ -1,0 +1,227 @@
+// http://ionicframework.com/docs/v2/theming/
+// App Shared Imports
+// --------------------------------------------------
+// These are the imports which make up the design of this app.
+// By default each design mode includes these shared imports.
+// App Shared Sass variables belong in app.variables.scss.
+// Include Bourbon
+@import "_bourbon";
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+@import "../theme/common";
+
+[border-vertical] {
+  border-left-width: 1px;
+  border-left-style: solid;
+  border-right-width: 1px;
+  border-right-style: solid;
+}
+
+.copyText {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+button[gradient] {
+  background: linear-gradient(180deg, #32BF35 0%, #1B9C1E 100%);
+  border-radius: 3px;
+  color: #FDFFF7;
+
+  .button-inner {
+    -webkit-box-align: left;
+    -webkit-align-items: left;
+    -ms-flex-align: left;
+    align-items: left;
+    -webkit-box-pack: left;
+    -webkit-justify-content: left;
+    -ms-flex-pack: left;
+    justify-content: left;
+
+    ion-icon {
+      position: absolute;
+      right: 0;
+      transform: translateX(-75%);
+    }
+  }
+}
+
+button[gradient-alt] {
+  color: #32BF35;
+
+  .button-inner {
+    -webkit-box-align: left;
+    -webkit-align-items: left;
+    -ms-flex-align: left;
+    align-items: left;
+    -webkit-box-pack: left;
+    -webkit-justify-content: left;
+    -ms-flex-pack: left;
+    justify-content: left;
+
+    ion-icon {
+      position: absolute;
+      right: 0;
+      transform: translateX(-75%);
+
+      ::before {
+        color: #32BF35;
+      }
+    }
+  }
+}
+
+//logo
+.logo {
+  width: 200px;
+  height: 150px;
+  margin: 20px auto 0;
+  border-radius: 10%;
+  background: url("../assets/img/logo.png") no-repeat;
+  background-size: 100%;
+}
+
+// buttons configs
+.btn-facebook {
+  background-color: #3B5999;
+}
+
+.btn-twitter {
+  background-color: #00ACEE;
+}
+
+.btn-gplus {
+  background-color: #E04006
+}
+
+// Animate CSS
+.animated {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+  animation-duration: 2s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY,
+.animated.bounceIn,
+.animated.bounceOut {
+  animation-duration: .75s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.toastError .toast-container {
+  background-color: color($colors, 'danger');
+}
+
+.toastSuccess .toast-container {
+  background-color: color($colors, 'secondary');
+}
+
+.toastInfo .toast-container {
+  background-color: color($colors, 'dark');
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
+}
+
+.fadeInUp {
+  animation-name: fadeInUp;
+}
+
+ion-menu {
+  ion-content {
+    background-color: $white;
+  }
+
+  ion-header {
+    @include header-styles($white,
+      color($colors, header, contrast));
+    border-bottom: 1px solid #D8D8D8;
+  }
+
+  .header-md::after {
+    display: none;
+  }
+
+  ion-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .fblike {
+      flex-grow: 1;
+
+      [item-content] {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-10%, -50%);
+        width: $menu-width;
+      }
+    }
+  }
+}
+
+.voucherSheet {
+  .action-sheet-sub-title {
+    padding: 11px 16px 17px;
+    color: #757575;
+  }
+}

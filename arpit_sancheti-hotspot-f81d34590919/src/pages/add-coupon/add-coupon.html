@@ -1,0 +1,84 @@
+<!--
+  Generated template for the AddCouponPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Add Coupon</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list no-lines>
+        <ion-item>
+            <ion-label floating>Coupon Code</ion-label>
+            <ion-input type="text" [disabled]="isView" [(ngModel)]="coupon.couponCode"></ion-input>
+        </ion-item>
+        <ion-note>Code of the coupon</ion-note>
+        <ion-item>
+            <ion-label floating>Coupon Type</ion-label>
+            <ion-select [(ngModel)]="coupon.type">
+                <ion-option value="Wallet">Wallet</ion-option>
+                <ion-option value="Transactional">Transactional</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-note>Wallet Coupon are used for adding money in wallet, where as transactional Coupon are used to buy or
+            sell vouchers</ion-note>
+        <ion-item>
+            <ion-label floating>Minimum Value</ion-label>
+            <ion-input type="number" [disabled]="isView" [(ngModel)]="coupon.minAmount"></ion-input>
+        </ion-item>
+        <ion-note>Minimum Amount on which coupon can be applied.</ion-note>
+        <ion-item>
+            <ion-label>Absolute</ion-label>
+            <ion-checkbox [disabled]="isView" [(ngModel)]="coupon.isAbs"></ion-checkbox>
+        </ion-item>
+        <ion-note>Coupon discount need to be absolute or %age basis</ion-note>
+        <ion-item>
+            <ion-label floating>Value of Coupon</ion-label>
+            <ion-input type="number" [disabled]="isView" [(ngModel)]="coupon.value"></ion-input>
+        </ion-item>
+        <ion-note>discount provided by the coupon</ion-note>
+        <ion-item>
+            <ion-label floating>Max Coupon Value</ion-label>
+            <ion-input type="number" [disabled]="isView" [(ngModel)]="coupon.maxAmount"></ion-input>
+        </ion-item>
+        <ion-note>If the coupon's discount in on %age basis, then what should be the maximum discount that can be offer
+        </ion-note>
+        <ion-item>
+            <ion-label floating>Valid From</ion-label>
+            <ion-datetime displayFormat="MMM DD, YYYY HH:mm" min="2016" pickerFormat="MMM DD, YYYY HH:mm"
+                [disabled]="isView" [(ngModel)]="coupon.validityStart">
+            </ion-datetime>
+        </ion-item>
+        <ion-note>Coupon Start date</ion-note>
+        <ion-item>
+            <ion-label floating>Valid Till</ion-label>
+            <ion-datetime displayFormat="MMM DD, YYYY HH:mm" min="2016" pickerFormat="MMM DD, YYYY HH:mm"
+                [disabled]="isView" [(ngModel)]="coupon.validity"></ion-datetime>
+        </ion-item>
+        <ion-note>Coupon expiry date</ion-note>
+        <ion-item padding>
+            <button *ngIf="isAdd" ion-button full icon-start (click)="addCoupon()">
+                <ion-icon name="create">
+                </ion-icon>
+                Add Coupon
+            </button>
+            <button *ngIf="isView" ion-button full icon-start (click)="editCoupon()">
+                <ion-icon name="create">
+                </ion-icon>
+                Edit Coupon
+            </button>
+            <button *ngIf="isEdit" ion-button full icon-start (click)="saveCoupon()">
+                <ion-icon name="create">
+                </ion-icon>
+                Save Coupon
+            </button>
+        </ion-item>
+    </ion-list>
+</ion-content>

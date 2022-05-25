@@ -1,0 +1,143 @@
+<!--
+  Generated template for the ClientHomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <button ion-button menuToggle left>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title *ngIf="!planSelected">Select a Plan</ion-title>
+        <ion-title *ngIf="planSelected && !userSelected">Enter User Details</ion-title>
+        <ion-title *ngIf="planSelected && userSelected">Confirm</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<!-- <ion-content>
+  <ng-template #users let-attrs="attrs">
+    <div ion-text> +1  {{attrs.data.mobile}}</div>
+    <ion-note>{{attrs.data.name}} - {{attrs.data.userName}}</ion-note>
+  </ng-template>
+  <ion-auto-complete #selectedUser [options]="{ placeholder : 'Enter User Mobile' }" [dataProvider]="clientsPro"
+    [template]="users"></ion-auto-complete>
+  <ng-template #plans let-attrs="attrs">
+    <div class="heading">{{attrs.data.plan_name}}
+      <span class="amount">
+        {{attrs.data.price | currency: 'XCD': 'symbol': '2.2-2'}}
+      </span>
+    </div>
+    <p text-wrap class="info">
+      {{attrs.data.bytes_t > 0 ? + attrs.data.bytes_t + ' MB' : 'Unlimited'}} @
+      <ion-icon color="primary" name="arrow-round-down"></ion-icon> {{attrs.data.speed_dl}} kB/sec
+      <ion-icon color="other" name="arrow-round-up"></ion-icon> {{attrs.data.speed_ul}} kB/sec
+    </p>
+    <p class="info">
+      Valid for {{attrs.data.duration_val}} Day(s)
+    </p>
+  </ng-template>
+  <ion-auto-complete #selectedPlan [showResultsFirst]="true" [options]="{ placeholder : 'Enter Plan Name' }"
+    [dataProvider]="plansAuto" [template]="plans"></ion-auto-complete>
+</ion-content> -->
+
+<ion-content>
+    <ion-card>
+        <ion-card-content no-padding>
+            <ion-list *ngIf="!planSelected">
+                <button detail-push ion-item class="list-item" (click)="selectPlan(item)" *ngFor="let item of plans">
+                    <div class="heading">{{item.plan_name}}
+                        <span class="amount">
+                            {{item.price | currency: 'XCD': 'symbol': '2.2-2'}}
+                        </span>
+                    </div>
+                    <p text-wrap class="info">
+                        {{item.bytes_t > 0 ? + item.bytes_t + ' MB' : 'Unlimited'}} @
+                        <ion-icon color="primary" name="arrow-round-down"></ion-icon> {{item.speed_dl}} kB/sec
+                        <ion-icon color="other" name="arrow-round-up"></ion-icon> {{item.speed_ul}} kB/sec
+                    </p>
+                    <p class="info">
+                        Valid for {{item.duration_val}} Day(s)
+                    </p>
+                </button>
+            </ion-list>
+            <ion-list *ngIf="planSelected">
+                <button detail-push ion-item class="list-item" (click)="unSelectPlan()">
+                    <div class="heading">{{planSelected.plan_name}}
+                        <span class="amount">
+                            {{planSelected.price | currency: 'XCD': 'symbol': '2.2-2'}}
+                        </span>
+                    </div>
+                    <p text-wrap class="info">
+                        {{planSelected.bytes_t > 0 ? + planSelected.bytes_t + ' MB' : 'Unlimited'}} @
+                        <ion-icon color="primary" name="arrow-round-down"></ion-icon> {{planSelected.speed_dl}} kB/sec
+                        <ion-icon color="other" name="arrow-round-up"></ion-icon> {{planSelected.speed_ul}} kB/sec
+                        <span float-right>
+                            <ion-icon color="danger" name="close-circle"></ion-icon>
+                        </span>
+                    </p>
+                    <p class="info">
+                        Valid for {{planSelected.duration_val}} Day(s)
+                    </p>
+                </button>
+                <button *ngIf="userSelected && userSelected.userName" detail-push ion-item class="list-item"
+                    (click)="unSelectUser()">
+                    <ion-avatar item-start>
+                        <img
+                            [src]="userSelected.image || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'">
+                    </ion-avatar>
+                    <div class="heading">{{userSelected.name}}</div>
+                    <p class="info">{{userSelected.userName}}</p>
+                    <p class="info">
+                        <ion-row>
+                            <ion-col>
+                                <ion-icon color="primary" name="call"></ion-icon>
+                                +1 {{userSelected.mobile}}
+                            </ion-col>
+                            <ion-col>
+                                <ion-icon color="primary" name="pin"></ion-icon>
+                                {{userSelected.location}}
+                            </ion-col>
+                        </ion-row>
+                    </p>
+                    <span item-end>
+                        <ion-icon color="danger" name="close-circle"></ion-icon>
+                    </span>
+                </button>
+                <button *ngIf="userSelected && !userSelected.userName" detail-push ion-item class="list-item"
+                    (click)="unSelectUser()">
+                    <ion-avatar item-start>
+                        <img
+                            [src]="userSelected.image || 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'">
+                    </ion-avatar>
+                    <div class="heading">+1 {{mobile}}</div>
+                    <p class="info">This is not the registered User</p>
+                    <span item-end>
+                        <ion-icon color="danger" name="close-circle"></ion-icon>
+                    </span>
+                </button>
+                <ion-item *ngIf="!userSelected">
+                    <ion-label floating>
+                        <ion-icon name="phone-portrait"></ion-icon> Mobile Number +1
+                    </ion-label>
+                    <ion-input #input mask="(999) 999-9999" [(ngModel)]="mobile" type="tel"></ion-input>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+<ion-footer>
+    <button (click)="search()" ion-button block icon-right *ngIf="planSelected && !userSelected">
+
+        Submit
+        <ion-icon name="arrow-forward"></ion-icon>
+    </button>
+    <button block icon-right ion-button (click)="pay()" *ngIf="userSelected && planSelected">
+        Confirm and Pay &nbsp;&nbsp;
+        <ion-icon name="arrow-forward"></ion-icon>
+
+    </button>
+</ion-footer>

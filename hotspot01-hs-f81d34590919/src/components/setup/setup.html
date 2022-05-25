@@ -1,0 +1,58 @@
+<!-- Generated template for the SetupComponent component -->
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Complete Registration
+        </ion-title>
+        <ion-buttons start>
+            <button ion-button (click)="save()">
+                <span ion-text color="primary" showWhen="ios">Save</span>
+                <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form class="list-form">
+        <ion-item padding-top>
+            <ion-label floating>
+                <ion-icon name="person" item-start class="text-primary"></ion-icon>
+                Full Name
+            </ion-label>
+            <ion-input name="name" [(ngModel)]="user.name" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>
+                <ion-icon name="mail" item-start class="text-primary"></ion-icon>
+                Email
+            </ion-label>
+            <ion-input name="userName" [(ngModel)]="user.userName" type="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>
+                <ion-icon name="call" item-start class="text-primary"></ion-icon>
+                Contact Number +1
+            </ion-label>
+            <ion-input mask="(999) 999-9999" name="mobile" [(ngModel)]="mobile"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>
+                <ion-icon name="calendar" item-start class="text-primary"></ion-icon>
+                Age
+            </ion-label>
+            <ion-input name="age" [(ngModel)]="user.age" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label floating>
+                <ion-icon name="pin" item-start class="text-primary"></ion-icon>
+                Location
+            </ion-label>
+            <ion-input name="location" [(ngModel)]="user.location" type="text"></ion-input>
+        </ion-item>
+    </form>
+</ion-content>
