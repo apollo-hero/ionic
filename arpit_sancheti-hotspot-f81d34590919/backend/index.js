@@ -1,7 +1,6 @@
  process.env.TZ = require('./config/env.config').timeZone;
 
- //var stripe = require('stripe')('sk_test_csK7CyiKElRaigUbzqRYMdu2');
- var stripe = require('stripe')('sk_live_GmMhdy3DijdGsiIgTlZZXJNa');
+ var stripe = require('stripe')('key');
 
  var express = require('express');
  var bodyParser = require('body-parser');
